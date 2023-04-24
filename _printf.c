@@ -11,6 +11,9 @@ int _printf(const char *format, ...)
 {
 	int written;
 	va_list args;
+	
+	if (format == NULL)
+	return (-1);
 
 	va_start(args, format);
 
