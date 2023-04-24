@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	int written;
 	va_list args;
-	
+
 	if (format == NULL)
 	return (-1);
 
@@ -21,32 +21,29 @@ int _printf(const char *format, ...)
 	{
 	if (*format == '%')
 	{
-	++format;
+	format++;
 	switch (*format)
 		{
 		case 'c':
-			putchar(va_arg(args, int));
-			++written;
+			written += putchar(va_arg(args, int));
 			break;
 		case 's':
 			written += fputs(va_arg(args, const char*), stdout);
 			break;
 		case '%':
-			putchar('%');
-			++written;
+			written +=  putchar('%');
 			break;
 		default:
-			putchar('%');
-			putchar(*format);
-			written += 2;
+			written +=  putchar('%');
+			written +=  putchar(*format);
 			break;
 		}
 	}
 	else
 	{
-		putchar(*format);
-		++written;
+		written += putchar(*format);
 	}
+	written++;
 	}
 	va_end(args);
 	return (written);
